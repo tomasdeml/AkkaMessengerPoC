@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace AkkaMessenger
+namespace AkkaMessenger.Runtime.Emails.Sending
 {
-    class BatchCompleted
+    class BatchSent
     {
         public Guid BatchId { get; set; }
 
-        public BatchCompleted(Guid batchId)
+        public BatchSent(Guid batchId)
         {
             BatchId = batchId;
         }

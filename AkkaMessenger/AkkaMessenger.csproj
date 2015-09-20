@@ -42,6 +42,10 @@
       <HintPath>..\packages\AngelaSmith.1.1.0\lib\net45\Angela.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CsvHelper, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.2.13.2.0\lib\net40-client\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -56,24 +60,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BatchCompleted.cs" />
-    <Compile Include="Email.cs" />
-    <Compile Include="EmailBatchActor.cs" />
-    <Compile Include="EmailFeeder.cs" />
-    <Compile Include="EmailSenderActor.cs" />
-    <Compile Include="FeedEmailsReply.cs" />
-    <Compile Include="FeedEmailsRequest.cs" />
-    <Compile Include="PrepareBatch.cs" />
-    <Compile Include="MessengerActor.cs" />
+    <Compile Include="Runtime\ActorContextExtensions.cs" />
+    <Compile Include="Runtime\DefautEventSinkActor.cs" />
+    <Compile Include="InteractionDriverActor.cs" />
+    <Compile Include="Runtime\Jobs\Messages\GetJob.cs" />
+    <Compile Include="Runtime\Jobs\JobId.cs" />
+    <Compile Include="Runtime\Jobs\Messages\CreateJob.cs" />
+    <Compile Include="Runtime\Emails\IBatchBound.cs" />
+    <Compile Include="Runtime\Emails\Sending\BatchSent.cs" />
+    <Compile Include="Runtime\Emails\Email.cs" />
+    <Compile Include="Runtime\Emails\EmailBatchActor.cs" />
+    <Compile Include="Runtime\Emails\Generation\EmailFeederActor.cs" />
+    <Compile Include="Runtime\Emails\Sending\EmailSenderActor.cs" />
+    <Compile Include="Runtime\Emails\Generation\FeedEmailsReply.cs" />
+    <Compile Include="Runtime\Emails\Generation\FeedEmailsRequest.cs" />
+    <Compile Include="Runtime\Emails\CreateBatch.cs" />
+    <Compile Include="Runtime\Jobs\JobActor.cs" />
+    <Compile Include="Runtime\Failure.cs" />
+    <Compile Include="Runtime\Jobs\Messages\GetJobReply.cs" />
+    <Compile Include="Runtime\Jobs\SystemEvents\IJobEvent.cs" />
+    <Compile Include="Runtime\Jobs\SystemEvents\JobCreationFailed.cs" />
+    <Compile Include="Runtime\Jobs\SystemEvents\JobCreated.cs" />
+    <Compile Include="Runtime\Jobs\JobRegistryActor.cs" />
+    <Compile Include="Runtime\Jobs\Messages\InitializeRecipients.cs" />
+    <Compile Include="Runtime\Jobs\SystemEvents\RecipientsInitializationFailed.cs" />
+    <Compile Include="Runtime\Jobs\SystemEvents\RecipientsInitialized.cs" />
+    <Compile Include="Runtime\Jobs\JobRecipient.cs" />
+    <Compile Include="Runtime\Recipients\ValidatorActor.cs" />
+    <Compile Include="Runtime\Recipients\Messages\ValidateRecipients.cs" />
+    <Compile Include="Runtime\Result.cs" />
+    <Compile Include="Runtime\Success.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CreateEmailBatch.cs" />
-    <Compile Include="StartEmailBatch.cs" />
+    <Compile Include="Runtime\Emails\Sending\StartBatch.cs" />
+    <Compile Include="Runtime\Recipients\Messages\CancelParsing.cs" />
+    <Compile Include="Runtime\Recipients\ParsingFailedException.cs" />
+    <Compile Include="Runtime\Recipients\Messages\ProcessParsedRecipients.cs" />
+    <Compile Include="Runtime\Recipients\ParserActor.cs" />
+    <Compile Include="Runtime\Recipients\Messages\CompleteParsing.cs" />
+    <Compile Include="Runtime\Recipients\Messages\StartParsing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

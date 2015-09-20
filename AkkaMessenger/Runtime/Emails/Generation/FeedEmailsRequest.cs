@@ -1,16 +1,14 @@
-﻿using System;
-
-namespace AkkaMessenger
+﻿namespace AkkaMessenger.Runtime.Emails.Generation
 {
     class FeedEmailsRequest
     {
-        public Guid SplitId { get; set; }
+        public string SplitId { get; set; }
         public int FromId { get; set; }
         public int ToId { get; set; }
 
         public FeedEmailsRequest(int fromId, int toId)
         {
-            SplitId = Guid.NewGuid();
+            SplitId = $"{fromId}-{toId}";
             FromId = fromId;
             ToId = toId;
         }

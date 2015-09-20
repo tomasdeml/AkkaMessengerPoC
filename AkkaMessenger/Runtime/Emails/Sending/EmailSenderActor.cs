@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Akka.Actor;
 
-namespace AkkaMessenger
+namespace AkkaMessenger.Runtime.Emails.Sending
 {
     class EmailSenderActor : ReceiveActor
     {
@@ -19,14 +19,16 @@ namespace AkkaMessenger
 
             Receive<Email>(email =>
             {
-                Console.WriteLine($"Sending email to {email.ToAddress}"); 
-                sentEmails.Value.WriteLine($"TO={email.ToAddress}; SUBJECT={email.Subject}");
+                //sentEmails.Value.WriteLine($"TO={email.ToAddress}; SUBJECT={email.Subject}");
             });
         }
 
         protected override void PostStop()
         {
             base.PostStop();
+
+            if (!sentEmails.IsValueCreated) return;
+            Console.WriteLine($"Stopping email sender {Self.Path.Name}");
             sentEmails.Value.Dispose();
         }
     }

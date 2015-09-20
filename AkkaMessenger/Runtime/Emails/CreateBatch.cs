@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace AkkaMessenger
+namespace AkkaMessenger.Runtime.Emails
 {
-    class PrepareBatch
+    class CreateBatch : IBatchBound
     {
         public Guid BatchId { get; set; }
         public int NumberOfEmails { get; set; }
 
-        public PrepareBatch(Guid batchId, int numberOfEmails)
+        public CreateBatch(Guid batchId, int numberOfEmails)
         {
             BatchId = batchId;
             NumberOfEmails = numberOfEmails;
